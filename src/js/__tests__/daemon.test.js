@@ -1,31 +1,25 @@
 import Daemon from '../daemon';
 
-describe('testing demon character creation', () => {
-  it('testing the characters name', () => {
-    const olivar = new Daemon('Olivar');
-    expect(olivar.name).toBe('Olivar');
-  });
+test('Testing creating daemon', () => {
+  const daemon = new Daemon('name', 100);
+  expect(daemon.distance).toBe(NaN);
+});
 
-  it('testing the characters stoned', () => {
-    const olivar = new Daemon('Olivar');
-    expect(olivar.stoned).toBe(false);
-  });
+test('Testing daemon attack without stoned', () => {
+  const daemon = new Daemon('name', 100);
+  daemon.distance = 2;
+  expect(daemon.attack).toBe(90);
+});
 
-  it('testing the characters stoned', () => {
-    const olivar = new Daemon('Olivar');
-    olivar.stoned = true;
-    expect(olivar.stoned).toBe(true);
-  });
+test('Testing daemon attack with stoned', () => {
+  const daemon = new Daemon('name', 100);
+  daemon.distance = 2;
+  daemon.stoned = true;
+  expect(daemon.attack).toBe(85);
+});
 
-  it('testing the characters finalAttack', () => {
-    const olivar = new Daemon('Olivar');
-    olivar.attack = 2;
-    expect(olivar.attack).toBe(85);
-  });
-
-  it('testing the characters finalAttack', () => {
-    const olivar = new Daemon('Olivar');
-    olivar.attack = 1;
-    expect(olivar.attack).toBe(100);
-  });
+test('Testing daemon attack without distance setup', () => {
+  const daemon = new Daemon('name', 100);
+  daemon.stoned = true;
+  expect(daemon.attack).toBe(NaN);
 });

@@ -1,9 +1,10 @@
 /* eslint-disable linebreak-style */
+/* eslint-disable linebreak-style */
 import Character from './character';
 
-export default class Deamon extends Character {
-  constructor(name) {
-    super('Daemon');
+export default class Daemon extends Character {
+  constructor(name, attack) {
+    super('Daemon', attack);
     this.name = name;
   }
 }

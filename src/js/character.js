@@ -1,10 +1,13 @@
 export default class Character {
-  constructor(type) {
-    this.baseAttack = 100;
-    this.type = type;
+  constructor(type, attack) {
+    if (['Daemon', 'Magician'].includes(type)) {
+      this.type = type;
+    } else {
+      throw new Error('Character type not allowed!');
+    }
+    this.baseAttackPower = attack;
     this.stone = false;
-    this.finalAttack = null;
-    this.arrCoefficient = [1.0, 0.9, 0.8, 0.7, 0.6];
+    this.attackDistance = NaN;
   }
 
   set stoned(stone) {
@@ -15,21 +18,26 @@ export default class Character {
     return this.stone;
   }
 
-  set attack(distance) {
-    let result = this.baseAttack * (this.arrCoefficient[Math.min((distance), 5) - 1]);
-    const nameChar = ['Magician', 'Daemon'].includes(this.type);
+  set distance(distance) {
+    this.attackDistance = distance;
+  }
 
-    if (Number.isNaN(result)) {
-      result = null;
-    }
-    if (nameChar === true) {
-      result -= (Math.log2(distance) * 5);
-    }
+  get distance() {
+    return this.attackDistance;
+  }
 
-    this.finalAttack = result;
+  get baseAttack() {
+    return this.baseAttackPower;
   }
 
   get attack() {
-    return this.finalAttack;
+    if (Number.isNaN(this.attackDistance)) {
+      return NaN;
+    }
+    let result = this.baseAttack * (1 - (this.attackDistance - 1) / 10);
+    if (this.stoned) {
+      result -= Math.log2(this.attackDistance) * 5;
+    }
+    return result;
   }
 }

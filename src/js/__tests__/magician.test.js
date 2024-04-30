@@ -1,31 +1,25 @@
 import Magician from '../magician';
 
-describe('testing demon character creation', () => {
-  it('testing the characters name', () => {
-    const olivar = new Magician('Olivar');
-    expect(olivar.name).toBe('Olivar');
-  });
+test('Testing creating magician', () => {
+  const magician = new Magician('name', 100);
+  expect(magician.distance).toBe(NaN);
+});
 
-  it('testing the characters stoned', () => {
-    const olivar = new Magician('Olivar');
-    expect(olivar.stone).toBe(false);
-  });
+test('Testing magician attack without stoned', () => {
+  const magician = new Magician('name', 100);
+  magician.distance = 2;
+  expect(magician.attack).toBe(90);
+});
 
-  it('testing the characters stoned', () => {
-    const olivar = new Magician('Olivar');
-    olivar.stone = true;
-    expect(olivar.stone).toBe(true);
-  });
+test('Testing magician attack with stoned', () => {
+  const magician = new Magician('name', 100);
+  magician.distance = 2;
+  magician.stoned = true;
+  expect(magician.attack).toBe(85);
+});
 
-  it('testing the characters finalAttack', () => {
-    const olivar = new Magician('Olivar');
-    olivar.attack = 2;
-    expect(olivar.attack).toBe(85);
-  });
-
-  it('testing the characters finalAttack', () => {
-    const olivar = new Magician('Olivar');
-    olivar.attack = 1;
-    expect(olivar.attack).toBe(100);
-  });
+test('Testing magician attack without distance setup', () => {
+  const magician = new Magician('name', 100);
+  magician.stoned = true;
+  expect(magician.attack).toBe(NaN);
 });

@@ -18,6 +18,14 @@ test('Testing magician attack with stoned', () => {
   expect(magician.attack).toBe(85);
 });
 
+test('Testing magician attack with attack', () => {
+  const magician = new Magician('name');
+  magician.distance = 2;
+  magician.attack = 100;
+  magician.stoned = true;
+  expect(magician.attack).toBe(85);
+});
+
 test('Testing magician attack without distance setup', () => {
   const magician = new Magician('name', 100);
   magician.stoned = true;

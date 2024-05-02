@@ -30,6 +30,10 @@ export default class Character {
     return this.baseAttackPower;
   }
 
+  set attack(damage) {
+    this.baseAttackPower = damage;
+  }
+
   get attack() {
     if (Number.isNaN(this.attackDistance)) {
       return NaN;

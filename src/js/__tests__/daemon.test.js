@@ -18,6 +18,14 @@ test('Testing daemon attack with stoned', () => {
   expect(daemon.attack).toBe(85);
 });
 
+test('Testing daemon attack with attack', () => {
+  const daemon = new Daemon('name');
+  daemon.distance = 2;
+  daemon.attack = 100;
+  daemon.stoned = true;
+  expect(daemon.attack).toBe(85);
+});
+
 test('Testing daemon attack without distance setup', () => {
   const daemon = new Daemon('name', 100);
   daemon.stoned = true;
